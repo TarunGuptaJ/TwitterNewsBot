@@ -1,2 +1,2 @@
 # TwitterNewsBot
-Building a twitter bot for creating reminders on tweets.
+Building a twitter bot for displaying news snippets on mention.
