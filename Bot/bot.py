@@ -1,5 +1,7 @@
 import tweepy
 import apikeyconstants
+import requests
+import random
 
 CONSUMER_KEY = apikeyconstants.CONSUMER_KEY
 CONSUMER_SECRET = apikeyconstants.CONSUMER_SECRET
@@ -26,12 +28,49 @@ def store_last_seen_id(last_seen_id,file_name):
 
 # 1272502525892026368
 
-last_seen_id = retrieve_last_seen_id(FILENAME)
-mentions = api.mentions_timeline(last_seen_id,tweet_mode = 'extended')
-for mention in reversed(mentions):
-    print(str(mention.id) + " " + mention.full_text)
-    last_seen_id = mention.id
-    store_last_seen_id(last_seen_id,FILENAME)
-    print('Responding back')
-    api.update_status('@' + mention.user.screen_name + ' ' + 
-        'Test reply from bot, Yayy!',mention.id)
+def construct_url_api(mention,topic):
+    url = 'http://newsapi.org/v2/top-headlines?'
+    url = url + 'q=' + str(topic).lower() + '&'
+    url = url + 'language=en&'
+    date = mention.created_at
+    datestr = str(date.year)+'-'+str(date.month)+'-'+str(date.day)
+    url = url + 'from=' + str(datestr) + '&'
+    url = url + 'sortBy=popularity&'
+    url = url + 'apiKey='+str(apikeyconstants.NewsApiKeyMine)
+    return url
+    
+def getinfo(url,mention):
+    lenofat = len(str(mention.user.screen_name))+3
+    response = requests.get(url).json()
+    totalarticles = len(response['articles'])
+    if(totalarticles == 0):
+        return 'Sorry, There seem to be no articles for the requested topic'
+
+    else:
+        # Tweet Size is the main constraint
+        # Iterate through them and find the first best matching 
+
+def construct_tweet(mention,text):
+    tweet = '@' + mention.user.screen_name + ' '
+
+
+def onloop(FILENAME):
+    last_seen_id = retrieve_last_seen_id(FILENAME)
+    mentions = api.mentions_timeline(last_seen_id,tweet_mode = 'extended')
+    for mention in reversed(mentions):
+        print(mention.created_at)
+        print(str(mention.id) + " " + mention.full_text)
+        
+        textlist = list((mention.full_text).split())
+        print(textlist)
+        topic = textlist[1]
+        print(topic)
+        print(construct_url_api(mention,topic))
+
+        last_seen_id = mention.id
+        store_last_seen_id(last_seen_id,FILENAME)
+        print('Responding back')
+        api.update_status('@' + mention.user.screen_name + ' ' + 
+            'Test reply from bot, Yayy!',mention.id)
+
+onloop(FILENAME)
