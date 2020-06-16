@@ -1,13 +1,16 @@
 import tweepy
-import apikeyconstants
 import requests
 import random
 import time
+import os
+from dotenv import load_dotenv
 
-CONSUMER_KEY = apikeyconstants.CONSUMER_KEY
-CONSUMER_SECRET = apikeyconstants.CONSUMER_SECRET
-ACCESS_KEY = apikeyconstants.ACCESS_KEY
-ACCESS_SECRET = apikeyconstants.ACCESS_SECRET
+load_dotenv() # Loading all keys from the .env
+
+CONSUMER_KEY = os.getenv('CONSUMER_KEY')
+CONSUMER_SECRET = os.getenv('CONSUMER_SECRET')
+ACCESS_KEY = os.getenv('ACCESS_KEY')
+ACCESS_SECRET = os.getenv('ACCESS_SECRET')
 
 auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_KEY,ACCESS_SECRET)
@@ -37,7 +40,7 @@ def construct_url_api(mention,topic):
     datestr = str(date.year)+'-'+str(date.month)+'-'+str(date.day)
     url = url + 'from=' + str(datestr) + '&'
     url = url + 'sortBy=popularity&'
-    url = url + 'apiKey='+str(apikeyconstants.NewsApiKeyMine)
+    url = url + 'apiKey='+str(os.getenv('NewsApiKeyMine'))
     return url
     
 def construct_tweet(url,mention):
