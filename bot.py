@@ -77,6 +77,14 @@ def construct_tweet(url,mention):
 
 
 def onloop(FILENAME):
+    if os.path.exists("last_seen_id.txt") == False:
+        #! on crash please put last tweet id from heroku
+        #! need to be fixed
+        #? or during maintenence put it manually before deploying again
+        temporary = open("last_seen_id.txt", "w+")
+        temporary.write("1272502525892026368")
+        temporary.close()
+        
     last_seen_id = retrieve_last_seen_id(FILENAME)
     mentions = api.mentions_timeline(last_seen_id,tweet_mode = 'extended')
     for mention in reversed(mentions):
