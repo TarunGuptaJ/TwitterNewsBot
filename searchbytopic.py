@@ -8,9 +8,10 @@ from outsideconstants import *
 #     'from=2020-05-15&'
 #     'sortBy=popularity&'
 #     'apiKey='+str(NewsApiKeyMine))
-url = 'http://newsapi.org/v2/top-headlines?'+'q=qiuwr&'+'language=en&'+'from=2020-05-15&'+'sortBy=popularity&'+'apiKey='+str(NewsApiKeyMine)
+url = 'http://newsapi.org/v2/top-headlines?'+'q=corona&'+'language=en&'+'from=2020-05-16&'+'sortBy=popularity&'+'apiKey='+str(NewsApiKeyMine)
 response = requests.get(url).json()
-print(response)
+# print(response)
+print(response['articles'][0]['url'])
 totalarticles = len(response['articles'])
 print(totalarticles)
 # chosearticle = random.randint(0,totalarticles-1)
