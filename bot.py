@@ -2,6 +2,7 @@ import tweepy
 import apikeyconstants
 import requests
 import random
+import time
 
 CONSUMER_KEY = apikeyconstants.CONSUMER_KEY
 CONSUMER_SECRET = apikeyconstants.CONSUMER_SECRET
@@ -96,5 +97,6 @@ def onloop(FILENAME):
         print('Responding back')
         # api.update_status('@' + mention.user.screen_name + ' ' + 'Test reply from bot, Yayy!',mention.id)
         api.update_status(str(construct_tweet(url,mention)),mention.id)
-
-onloop(FILENAME)
+while True:
+    onloop(FILENAME)
+    time.sleep(30)
