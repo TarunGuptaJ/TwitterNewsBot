@@ -40,7 +40,7 @@ def construct_url_api(mention,topic):
     datestr = str(date.year)+'-'+str(date.month)+'-'+str(date.day)
     url = url + 'from=' + str(datestr) + '&'
     url = url + 'sortBy=popularity&'
-    url = url + 'apiKey='+str(os.getenv('NewsApiKeyMine'))
+    url = url + 'apiKey='+str(os.getenv('NEWS_KEY'))
     return url
     
 def construct_tweet(url,mention):
