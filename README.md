@@ -1,7 +1,7 @@
 # TwitterNewsBot
 Building a twitter bot for displaying news snippets on mention. To use it just [@GetNewsAbout](https://twitter.com/GetNewsAbout) with a topic and we'll reply back with a news article :smiley:
 
-![](images/SS.png)
+![](Images/SS.png)
 
 ## **Setup**
 
