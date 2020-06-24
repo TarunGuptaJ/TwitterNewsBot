@@ -3,6 +3,8 @@ Building a twitter bot for displaying news snippets on mention. To use it just [
 
 ![](Images/SS.PNG)
 
+---
+
 ## **Setup**
 
 ### **Requirements**
