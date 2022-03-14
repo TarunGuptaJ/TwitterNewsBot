@@ -12,7 +12,7 @@ Building a twitter bot for displaying news snippets on mention. To use it just [
 
 To avail all the necessary dependencies for the project
 ```bash
-pip3 install -r requirements.txt
+pip3 install -r reqzsuirements.txt
 ```
 ---
 ### **Get API keys**
